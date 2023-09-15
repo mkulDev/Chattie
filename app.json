@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "chattie",
+    "slug": "chattie",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./src/assets/chattie.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/chattiesplash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a6553"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-chattie.png",
+        "backgroundColor": "#1a6553"
+      },
+      "package": "mkulDev.chattie"
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6269e8f3-df8d-4717-add8-2de634649a85"
+      }
+    }
+  }
+}
