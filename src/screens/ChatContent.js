@@ -4,7 +4,7 @@ import { db, auth } from '../../firebase'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { takePhoto } from '../utils/takeCameraPhoto' // 0 for disc : 1 for camera
-import { uploadImage, uploadMessage } from '../utils/handleChats'
+import { uploadImage, uploadMessage, updateFriendPhotoIfNeeded } from '../utils/handleChats'
 import { onSnapshot, collection, query, orderBy, limit } from 'firebase/firestore'
 import Message from '../components/Message'
 import image from '../assets/chat-bg.jpg'
@@ -16,12 +16,13 @@ const ChatContent = ({ route }) => {
   const [attachment, setAttachment] = useState(null)
   const [chats, setChats] = useState([])
   const { client, chatId } = route.params
-
+  console.log(client)
   if (!chatId) navigation.replace('ChatScreen')
   const newtMessageRef = useRef()
 
   useEffect(() => {
     newtMessageRef.current?.scrollToEnd({ animated: true })
+    updateFriendPhotoIfNeeded(client, auth.currentUser.uid)
   }, [chats])
 
   useEffect(() => {

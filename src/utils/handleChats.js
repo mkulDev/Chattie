@@ -112,3 +112,24 @@ export const getLastMessage = async (chatId) => {
     console.log('getLastMessage', error)
   }
 } */
+
+export const updateFriendPhotoIfNeeded = async (client, userUid) => {
+  try {
+    const clientRef = doc(db, 'users', client.uid)
+    const docSnap = await getDoc(clientRef)
+    const clientData = docSnap.data()
+    if (clientData.photoURL !== client.photoURL) {
+      const userRef = doc(db, 'users', userUid)
+      const docUser = await getDoc(userRef)
+      const userData = docUser.data()
+
+      const updateNewUsers = userData.knownUsers.map((element) => {
+        if (element.uid === client.uid) return { ...element, photoURL: clientData.photoURL }
+        return element
+      })
+      await setDoc(doc(db, 'users', userUid), { ...userData, knownUsers: updateNewUsers })
+    }
+  } catch (error) {
+    console.error('Error uploading message to Firestore:', error)
+  }
+}
